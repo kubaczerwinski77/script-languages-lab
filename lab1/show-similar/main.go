@@ -7,16 +7,38 @@ import (
 )
 
 func main() {
-	params := os.Args[1:]
-	// loop through each environmental variable
-	for _, item := range os.Environ() {
-		// split to pair {key, value}
-		pair := strings.SplitN(item, "=", 2)
-		// loop through each params and check if param is substring of key
-		for _, param := range params {
-			if strings.Contains(pair[0], strings.ToUpper(param)) {
-				fmt.Println(item)
+	os.Setenv("SUPER;COMPLICATED;NAME", "my/environmental/variable")
+	args := os.Args[1:]
+	result := []string{}
+	for _, arg := range args {
+		exists := false
+		for _, env := range os.Environ() {
+			pair := strings.SplitN(env, "=", 2)
+			if strings.Contains(pair[0], arg) {
+				result = append(result, env)
+				exists = true
 			}
 		}
+
+		if !exists {
+			result = append(result, arg + "=NONE")
+		}
+	}
+
+	for _, v := range result {
+		displayVariable(v)
+	}
+}
+
+func displayVariable(variable string) {
+	if strings.Contains(variable, ";") {
+		slice := strings.Split(variable, ";")
+		complexName := ""
+		for _, v := range slice {
+			complexName += "\t" + v + "\n"
+		}
+		fmt.Println(complexName)
+	} else {
+		fmt.Println(variable)
 	}
 }
