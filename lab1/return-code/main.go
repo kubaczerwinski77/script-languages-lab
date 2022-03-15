@@ -57,7 +57,7 @@ func main() {
 	// return proper value depends on args
 	for index, arg := range args {
 		if arg == maxKey {
-			fmt.Println(index + 1)
+			os.Exit(index + 1)
 		}
 	}
 }
