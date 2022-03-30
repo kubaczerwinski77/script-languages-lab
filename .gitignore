@@ -8,6 +8,6 @@
 !*/
 
 go.mod
+column.csv
 .DS_Store
 .txt
-.csv
