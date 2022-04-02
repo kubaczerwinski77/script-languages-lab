@@ -64,9 +64,9 @@ func display(onlyDir, size bool, dateSort string, result []File) {
 			continue
 		}
 		if size {
-			fmt.Printf("%-15s %-6d %-20s\n", item.name, item.size, parseTime(item.modTime))
+			fmt.Printf("%s %d %s\n", item.name, item.size, parseTime(item.modTime))
 		} else {
-			fmt.Printf("%-15s %-20s\n", item.name, parseTime(item.modTime))
+			fmt.Printf("%s %s\n", item.name, parseTime(item.modTime))
 		}
 	}
 }
