@@ -10,4 +10,6 @@
 go.mod
 data.csv
 text.txt
+covid.tsv.txt
+numbers.txt
 .DS_Store
