@@ -13,9 +13,12 @@ import (
 func main() {
 	// define what aggregate function user what to use
 	functionPtr := flag.String("using", "", "a string")
+	labelPtr := flag.String("label", "", "a string")
+	sepPtr := flag.String("separator", ";", "a string")
 	flag.Parse()
 
 	scanner := bufio.NewScanner(os.Stdin)
+	var result float64
 	switch *functionPtr {
 	case "min":
 		min := math.MaxFloat64
@@ -29,7 +32,7 @@ func main() {
 				min = num
 			}
 		}
-		fmt.Println(min)
+		result = min
 	case "max":
 		max := 2.2E-308 // <- min float64 number in Go
 		for scanner.Scan() {
@@ -42,7 +45,7 @@ func main() {
 				max = num
 			}
 		}
-		fmt.Println(max)
+		result = max
 	case "sum":
 		sum := 0.0
 		for scanner.Scan() {
@@ -53,7 +56,7 @@ func main() {
 
 			sum += num
 		}
-		fmt.Println(sum)
+		result = sum
 	case "avg":
 		sum := 0.0
 		count := 0
@@ -66,7 +69,7 @@ func main() {
 			sum += num
 			count += 1
 		}
-		fmt.Println(sum / float64(count))
+		result = sum / float64(count)
 	case "count":
 		count := 0
 		for scanner.Scan() {
@@ -77,14 +80,14 @@ func main() {
 
 			count += 1
 		}
-		fmt.Println(float64(count))
+		result = float64(count)
 	case "countAll":
 		count := 0
 		for scanner.Scan() {
 			parseNumber(scanner.Text())
 			count += 1
 		}
-		fmt.Println(float64(count))
+		result = float64(count)
 	case "median":
 		slice := []float64{}
 		for scanner.Scan() {
@@ -105,17 +108,18 @@ func main() {
 			os.Exit(1)
 		}
 
-		var result float64
+		var res float64
 		if (length % 2 == 0) {
-			result = (slice[length / 2 - 1] + slice[length / 2]) / 2.0
+			res = (slice[length / 2 - 1] + slice[length / 2]) / 2.0
 		} else {
-			result = slice[length / 2]
+			res = slice[length / 2]
 		}
-		fmt.Println(result)
+		result = res
 	default:
 		fmt.Println("there is no such option for this flag")
 	}
 	
+	fmt.Printf("%s%s%f\n", *labelPtr, *sepPtr, result)
 }
 
 func parseNumber(num string) (float64, bool) {
