@@ -119,7 +119,7 @@ func main() {
 		fmt.Println("there is no such option for this flag")
 	}
 	
-	fmt.Printf("%s%s%f\n", *labelPtr, *sepPtr, result)
+	fmt.Printf("%s%s%.2f\n", *labelPtr, *sepPtr, result)
 }
 
 func parseNumber(num string) (float64, bool) {
