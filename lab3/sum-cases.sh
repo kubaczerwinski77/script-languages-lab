@@ -8,6 +8,18 @@ if [[ "$#" -ne 3 ]]; then
   exit 1
 fi
 
+# validate if year is not-negative number
+if [[ "$2" -lt 0 ]]; then
+  echo "Year cannot be a negative number! Given: $2"
+  exit 1
+fi
+
+# validate if month is a number between 1 and 12
+if [[ "$3" -le 1 || "$3" -ge 12 ]]; then
+  echo "Month must be a number between 1 and 12! Given: $3"
+  exit 1
+fi
+
 cat covid.tsv.txt |
   process --delimiter=$'\t' --separator=";" --project=10,3,2,4 | # pick columns continent | year | month | cases
   grep "$1;$2;$3" | # grab only those which fits arguments passsed to function
