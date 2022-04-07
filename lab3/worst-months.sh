@@ -14,13 +14,13 @@ if [[ "$1" -le 1 || "$1" -ge 12 ]]; then
   exit 1
 fi
 
-cat covid.tsv.txt |
+cat covid.tsv |
   process --delimiter=$'\t' --separator=";" --project=6,3,2 --select="$2" | # pick country, year, month that matches arg
   sort -t ';' -nk2 -nk3 | # sort by year and then by month
   uniq | # save unique groups to file
   while read group 
   do
-    cat covid.tsv.txt | # read file
+    cat covid.tsv | # read file
     process --delimiter=$'\t' --separator=";" --project=6,3,2,5 | # pick country, year, month, deaths
     grep "$group" | # choose only rows that matches unique group
     process --delimiter=";" --project=3 | # pick only deaths column

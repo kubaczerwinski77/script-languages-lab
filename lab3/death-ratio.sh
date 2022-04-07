@@ -8,14 +8,14 @@ if [[ "$#" -ne 2 ]]; then
   exit 1
 fi
 
-CASES=$(cat covid.tsv.txt |
+CASES=$(cat covid.tsv |
   process --delimiter=$'\t' --separator=";" --project=10,3,4 |
   grep "$1;$2" |
   process --delimiter=";" --project=2 |
   aggregate --using=sum --separator="")
 CASES=${CASES//".00"/""}
 
-DEATHS=$(cat covid.tsv.txt |
+DEATHS=$(cat covid.tsv |
   process --delimiter=$'\t' --separator=";" --project=10,3,5 |
   grep "$1;$2" |
   process --delimiter=";" --project=2 |
