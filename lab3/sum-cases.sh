@@ -24,4 +24,4 @@ cat covid.tsv |
   process --delimiter=$'\t' --separator=";" --project=10,3,2,4 | # pick columns continent | year | month | cases
   grep "$1;$2;$3" | # grab only those which fits arguments passsed to function
   process --delimiter=";" --project=3 | # pick only column with cases
-  aggregate --using=sum # aggreggate values using sum
+  aggregate --using=sum --separator="" # aggreggate values using sum
