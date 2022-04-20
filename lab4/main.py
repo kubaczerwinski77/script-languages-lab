@@ -24,6 +24,5 @@ dictionary = multipleAccumulate.getData()
 # print(dictionary)
 
 ### duck typing ###
-
 for data in [multipleAccumulate, textViewer]:
   print(data.getData())
