@@ -4,6 +4,9 @@ class TextStats:
     self.numberOfWords = 0
     self.numberOfNonalpha = 0
 
+  def __str__(self):
+    return f"numberOfLines: {self.numberOfLines}\nnumberOfWords: {self.numberOfWords}\nnumberOfNonalpha: {self.numberOfNonalpha}"
+
   def compute(self, text: str):
     self.numberOfLines = len(text.splitlines())
     self.numberOfWords = len(text.split())
