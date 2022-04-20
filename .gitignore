@@ -7,9 +7,11 @@
 # Unignore all dirs
 !*/
 
-go.mod
-data.csv
-text.txt
-covid.tsv
-numbers.txt
+__pycache__
 .DS_Store
+test.py
+*.mod
+*.jpeg
+*.txt
+*.tsv
+*.csv
